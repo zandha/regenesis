@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REGENESIS — Permaculture Design & Community Development · Costa Rica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #FFFFFF;
+  --cream: #FDFAF4;
+  --sky: #87CEEB;
+  --ocean: #1A6EA8;
+  --true-blue: #1B4F8A;
+  --lime: #5FD81F;
+  --grass: #3A7D2C;
+  --forest: #1E4620;
+  --yellow: #F5C842;
+  --tangerine: #F07C2A;
+  --soil: #3D2108;
+  --charcoal: #2C2C2C;
+  --sand: #E8D9B5;
+  --heart-grad: linear-gradient(135deg, #C0341D 0%, #F0892E 100%);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--charcoal);
+  background: var(--cream);
+  overflow-x: hidden;
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────── */
+h1, h2, h3, h4 { font-family: 'Fraunces', serif; font-weight: 600; line-height: 1.15; }
+.mono { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.02em; }
+.italic { font-style: italic; }
+
+/* ─── SCROLL REVEAL ──────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ─── NAV ────────────────────────────────────────── */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2.5rem;
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  border-bottom: 6px solid var(--lime);
+  transition: background 0.4s, box-shadow 0.4s;
+}
+#nav.scrolled {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 104px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: -10px;
+  display: block;
+}
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.nav-brand-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.18rem;
+  letter-spacing: 0.01em;
+  color: var(--forest);
+  line-height: 1.25;
+}
+.nav-brand-name .brand-mark { font-weight: 700; }
+.nav-brand-tag {
+  font-family: 'Fraunces', serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--grass);
+  max-width: 420px;
+  margin-top: 2px;
+  line-height: 1.25;
+}
+@media (max-width: 768px) {
+  .nav-brand-tag { display: none; }
+  .nav-brand-name { font-size: 1.2rem; }
+  .nav-logo img { height: 76px; }
+}
+@media (max-width: 480px) {
+  .nav-logo img { height: 50px; }
+  .nav-brand-name { font-size: 1rem; }
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--forest);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+#nav.scrolled .nav-links a { color: var(--forest); }
+#nav .nav-links a { color: var(--forest); }
+.nav-links a:hover { color: var(--tangerine); }
+#nav.scrolled .nav-links a:hover { color: var(--tangerine); }
+.nav-cta {
+  background: var(--heart-grad);
+  color: var(--white) !important;
+  padding: 0.6rem 1.6rem !important;
+  border-radius: 100px;
+  font-weight: 600 !important;
+  font-size: 1.05rem !important;
+  transition: filter 0.2s, transform 0.2s !important;
+}
+.nav-cta:hover { filter: brightness(0.92); transform: translateY(-1px); }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--forest);
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+#nav.scrolled .hamburger span { background: var(--forest); }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; right: -100%;
+  width: min(340px, 90vw);
+  height: 100vh;
+  background: var(--forest);
+  z-index: 999;
+  padding: 6rem 2.5rem 2.5rem;
+  transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.mobile-menu.open { right: 0; }
+.mobile-menu ul { list-style: none; }
+.mobile-menu ul li { margin-bottom: 1.5rem; }
+.mobile-menu ul a {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  color: var(--cream);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-menu ul a:hover { color: var(--tangerine); }
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 998;
+}
+.mobile-overlay.open { display: block; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: block; }
+  #nav { padding: 0.75rem 1.25rem; }
+}
+
+/* ─── HERO ───────────────────────────────────────── */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('images/hero-bg.webp') center center / cover no-repeat;
+  transform: scale(1.08);
+  transition: transform 0.1s linear;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 45, 20, 0.35) 0%,
+    rgba(30, 70, 32, 0.5) 50%,
+    rgba(30, 70, 32, 0.85) 100%
+  );
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+  padding: 2rem 1.5rem;
+  margin-top: 8vh;
+}
+.hero-content h1 {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  color: var(--white);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  margin-bottom: 1.25rem;
+}
+.hero-content p {
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: rgba(255,255,255,0.92);
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.hero-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem !important;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.7) !important;
+  margin-top: 1.5rem !important;
+  text-transform: uppercase;
+}
+.btn {
+  display: inline-block;
+  background: var(--heart-grad);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: filter 0.25s, transform 0.2s, box-shadow 0.25s;
+  box-shadow: 0 4px 18px rgba(192,52,29,0.38);
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+.btn:hover {
+  filter: brightness(0.92);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(192,52,29,0.45);
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--tangerine);
+  color: var(--tangerine);
+  box-shadow: none;
+}
+.btn-outline:hover {
+  background: var(--tangerine);
+  color: var(--white);
+}
+.btn-lime {
+  background: var(--lime);
+  color: var(--forest);
+  box-shadow: 0 4px 18px rgba(95,216,31,0.4);
+}
+.btn-lime:hover {
+  background: #4dbe15;
+  color: var(--forest);
+  box-shadow: 0 8px 28px rgba(95,216,31,0.5);
+}
+
+.scroll-arrow {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: bounce 2s ease-in-out infinite;
+}
+.scroll-arrow svg { width: 32px; height: 32px; }
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ─── SECTION BASE ───────────────────────────────── */
+section { padding: 6rem 1.5rem; }
+.container { max-width: 1120px; margin: 0 auto; }
+.section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tangerine);
+  margin-bottom: 0.75rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+.section-sub {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  max-width: 680px;
+}
+.text-center { text-align: center; }
+.text-center .section-sub { margin: 0 auto; }
+
+/* ─── SECTION 2: PROBLEM ─────────────────────────── */
+#problem {
+  background: var(--sand);
+  color: var(--charcoal);
+  padding: 6rem 1.5rem;
+}
+#problem .section-title { color: var(--forest); }
+#problem .section-label { color: var(--tangerine); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+.problem-card {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(58,125,44,0.15);
+  border-radius: 16px;
+  padding: 1.75rem;
+  transition: background 0.3s, transform 0.3s;
+}
+.problem-card:hover {
+  background: rgba(255,255,255,0.95);
+  transform: translateY(-3px);
+}
+.problem-card:last-child:nth-child(odd) {
+  grid-column: span 2;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.problem-card--solution {
+  background: var(--heart-grad);
+  border: none;
+  box-shadow: 0 8px 28px rgba(192,52,29,0.30);
+}
+.problem-card--solution .solution-label {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255,255,255,0.22);
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+  margin-bottom: 0.6rem;
+}
+
+.problem-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  color: var(--forest);
+  margin-bottom: 0.5rem;
+}
+.problem-card--solution h3 { color: #fff; }
+.problem-card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--charcoal);
+}
+.problem-card--solution p { color: rgba(255,255,255,0.95); }
+.problem-card--solution:hover {
+  background: var(--yellow);
+  box-shadow: 0 8px 28px rgba(245,200,66,0.45);
+}
+.problem-card--solution:hover h3 { color: var(--forest); }
+.problem-card--solution:hover p { color: var(--charcoal); }
+.problem-card--solution:hover .solution-label {
+  color: var(--soil);
+  background: rgba(61,33,8,0.12);
+}
+/* Problem CTA card */
+.problem-cta-card {
+  background: var(--tangerine);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+}
+.problem-cta-inner {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.05rem, 1.9vw, 1.25rem);
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.problem-quote {
+  text-align: center;
+  margin: 2rem 0;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--forest);
+}
+.solution-card {
+  max-width: 760px;
+  margin: 3rem auto 0;
+  text-align: center;
+  background: linear-gradient(135deg, var(--tangerine), #f59e42);
+  border-radius: 20px;
+  padding: 2.5rem 2.25rem;
+  box-shadow: 0 12px 40px rgba(240,124,42,0.35);
+}
+.solution-label {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.18);
+  padding: 0.35rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+.solution-card p {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.8vw, 1.6rem);
+  line-height: 1.4;
+  color: #fff;
+  margin: 0;
+}
+
+/* ─── SECTION 3: PURPOSE ─────────────────────────── */
+#purpose { background: var(--soil); }
+#purpose .section-title { color: var(--yellow); }
+#purpose .section-label { color: var(--tangerine); }
+#purpose .section-sub { color: rgba(253,250,244,0.85); }
+.pull-quote cite { color: var(--tangerine); }
+.pull-quote {
+  border-left: 4px solid var(--tangerine);
+  padding: 1.5rem 2rem;
+  margin: 3rem 0;
+  background: rgba(255,255,255,0.06);
+  border-radius: 0 12px 12px 0;
+}
+.pull-quote blockquote {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+.pull-quote cite {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  color: var(--tangerine);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.ethics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.ethics-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 2.25rem 1.75rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.ethics-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+}
+.ethics-icon {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.ethics-card h3 {
+  font-size: 1.15rem;
+  color: var(--yellow);
+  margin-bottom: 0.6rem;
+}
+.ethics-card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(253,250,244,0.85);
+}
+
+/* ─── SECTION 4: TRAVIS ──────────────────────────── */
+#travis { background: var(--white); }
+.travis-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+.travis-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.travis-text {
+  display: flex;
+  flex-direction: column;
+}
+.travis-photo {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(30,70,32,0.2);
+  aspect-ratio: 4/5;
+}
+.travis-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.travis-text .name-badge {
+  display: inline-block;
+  background: #469A33;
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+}
+.travis-text h2 {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: var(--forest);
+  margin-bottom: 1.5rem;
+}
+.role-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.role-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+  border: 1px solid var(--lime);
+  color: var(--grass);
+}
+.travis-roles {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 1.25rem;
+}
+.travis-roles li {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  color: var(--grass);
+  padding: 0.3rem 0 0.3rem 1.1rem;
+  position: relative;
+  border-bottom: 1px solid rgba(58,125,44,0.1);
+}
+.travis-roles li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--soil);
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+.travis-roles li.travis-lang::before {
+  content: '🌐';
+  font-size: 0.95rem;
+}
+.travis-roles li.travis-lang {
+  padding-left: 1.4rem;
+}
+.travis-roles li:last-child {
+  border-bottom: none;
+}
+.travis-roles {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.25rem;
+}
+.travis-roles li {
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--grass);
+  padding: 0.3rem 0 0.3rem 1.4rem;
+  position: relative;
+  border-bottom: 1px solid rgba(58,125,44,0.1);
+}
+.travis-roles li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--soil);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.travis-bio {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+}
+.travis-cta {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--soil);
+  background: var(--sand);
+  padding: 1.75rem 2.25rem;
+  border-radius: 14px;
+  border-left: 5px solid var(--tangerine);
+  margin-top: 3rem;
+  text-align: center;
+}
+
+/* ─── SECTION 5: ECO-ALLIES ──────────────────────── */
+#allies {
+  background: var(--white);
+}
+#allies .section-title { color: var(--forest); }
+#allies .section-label { color: var(--tangerine); }
+#allies .section-sub { color: #555; }
+.allies-logos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: center;
+  align-items: center;
+  gap: 0.5rem 0.4rem;
+  margin-top: 3rem;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 900px) {
+  .allies-logos { grid-template-columns: repeat(3, 1fr); gap: 2rem 1.25rem; }
+}
+@media (max-width: 560px) {
+  .allies-logos { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1rem; }
+}
+.ally-logo {
+  display: block;
+  transition: transform 0.3s;
+}
+.ally-logo:hover {
+  transform: scale(1.04);
+}
+.ally-logo img {
+  height: 104px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+}
+
+/* ─── SECTION 6: PROCESS ─────────────────────────── */
+#process {
+  background: var(--forest);
+  color: var(--cream);
+}
+#process .section-title { color: var(--yellow); }
+#process .section-sub { color: rgba(253,250,244,0.75); }
+#process .section-label { color: var(--lime); }
+
+.timeline {
+  position: relative;
+  max-width: 920px;
+  margin: 4rem auto 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 99px;
+  bottom: 68px;
+  width: 2px;
+  background: rgba(253,250,244,0.15);
+  transform: translateX(-50%);
+}
+.timeline-step {
+  display: grid;
+  grid-template-columns: 1fr 52px 1fr;
+  align-items: center;
+  column-gap: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.step-text {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+/* Number always in the middle column */
+.step-num { grid-column: 2; grid-row: 1; align-self: center; }
+/* Odd (orange) steps: card LEFT, photo RIGHT */
+.timeline-step:nth-child(odd) .step-text { grid-column: 1; grid-row: 1; text-align: right; }
+.timeline-step:nth-child(odd) .step-img  { grid-column: 3; grid-row: 1; }
+/* Even (green) steps: photo LEFT, card RIGHT */
+.timeline-step:nth-child(even) .step-img  { grid-column: 1; grid-row: 1; }
+.timeline-step:nth-child(even) .step-text { grid-column: 3; grid-row: 1; text-align: left; }
+.timeline-step:nth-child(odd) .step-text { border-top: 3px solid var(--tangerine); }
+.timeline-step:nth-child(even) .step-text { border-top: 3px solid var(--lime); }
+.step-num {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--tangerine);
+  color: var(--white);
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(240,124,42,0.4);
+  position: relative;
+  z-index: 2;
+}
+/* Green-highlight steps (2 & 4) get green number circles */
+.timeline-step:nth-child(even) .step-num {
+  background: var(--lime);
+  color: var(--forest);
+  box-shadow: 0 4px 16px rgba(95,216,31,0.45);
+}
+.step-text h3 {
+  font-size: 1.25rem;
+  color: var(--yellow);
+  margin-bottom: 0.4rem;
+}
+.step-img {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+  line-height: 0;
+  height: 190px;
+}
+.step-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.step-img--contain { background:#fff; }
+.step-img--contain img { object-fit: contain; object-position: center; }
+/* Per-stage crop framing */
+.timeline-step:nth-child(1) .step-img img { object-position: top; }
+.timeline-step:nth-child(2) .step-img img { object-position: center; }
+.timeline-step:nth-child(4) .step-img img { object-position: center 40%; }
+@media (max-width: 680px) {
+  .timeline-step { grid-template-columns: 40px 1fr; column-gap: 1rem; row-gap: 0.75rem; }
+  .timeline::before { left: 20px; transform: none; }
+  .timeline-step:nth-child(odd) .step-num,
+  .timeline-step:nth-child(even) .step-num { grid-column: 1; grid-row: 1; }
+  .timeline-step:nth-child(odd) .step-img,
+  .timeline-step:nth-child(even) .step-img { grid-column: 2; grid-row: 1; }
+  .timeline-step:nth-child(odd) .step-text,
+  .timeline-step:nth-child(even) .step-text { grid-column: 2; grid-row: 2; text-align: left; }
+}
+.step-text p {
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: rgba(253,250,244,0.8);
+}
+.process-visual {
+  margin-top: 4rem;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+}
+.process-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.img-caption {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  color: rgba(253,250,244,0.65);
+  text-align: center;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+#process .img-caption { color: var(--lime); }
+
+/* ─── SECTION 7: SYNTROPIC ───────────────────────── */
+#syntropic { background: var(--ocean); }
+#syntropic .section-title { color: var(--yellow); }
+#syntropic .section-label { color: var(--lime); }
+#syntropic .section-sub { color: rgba(255,255,255,0.85); }
+#syntropic .img-caption-light { color: var(--lime); }
+#services .img-caption-light { color: #2E7D0A; font-weight: 500; }
+#services .yt-label { color: #2E7D0A; font-weight: 500; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+.feature-block {
+  padding: 2rem;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-top: 4px solid var(--lime);
+  border-radius: 18px;
+  box-shadow: 0 3px 18px rgba(0,0,0,0.15);
+  transition: transform 0.3s, background 0.3s;
+  text-align: center;
+}
+.feature-block:hover { transform: translateY(-3px); background: rgba(255,255,255,0.18); }
+.feature-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+.feature-block h3 {
+  font-size: 1.05rem;
+  color: var(--yellow);
+  margin-bottom: 0.5rem;
+}
+.feature-block p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.9);
+}
+.full-img {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 36px rgba(0,0,0,0.3);
+  margin: 2rem 0 0.5rem;
+}
+.stages-heading {
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  color: var(--yellow);
+  text-align: center;
+  margin: 3rem 0 0.5rem;
+}
+.stages-intro {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+}
+.stages-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin: 2rem 0 0.5rem;
+}
+.stage-row {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) 1.4fr;
+  gap: 1.75rem;
+  align-items: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 18px;
+  overflow: hidden;
+  padding: 1rem;
+}
+.stage-row-img { line-height: 0; }
+.stage-row-img img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+.stage-row-text { padding: 0.5rem 1rem 0.5rem 0; }
+.stage-row-text h3 {
+  font-size: 1.4rem;
+  color: var(--yellow);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+.stage-years {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--lime);
+  text-transform: uppercase;
+  margin-left: 0.4rem;
+}
+.stage-row-text p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.9);
+}
+@media (max-width: 680px) {
+  .stage-row { grid-template-columns: 1fr; gap: 1rem; }
+  .stage-row-text { padding: 0 0.5rem 0.5rem; }
+}
+.handdrawn-pair {
+  display: grid;
+  grid-template-columns: 1.52fr 1fr;
+  gap: 1.5rem;
+  margin: 2.5rem 0 0.5rem;
+  align-items: stretch;
+}
+.handdrawn-pair figure {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 36px rgba(0,0,0,0.3);
+  background: #fff;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.handdrawn-pair img {
+  width: 100%;
+  height: 100%;
+  max-height: 380px;
+  display: block;
+  border-radius: 4px;
+  object-fit: contain;
+}
+@media (max-width: 680px) {
+  .handdrawn-pair { grid-template-columns: 1fr; }
+  .handdrawn-pair img { height: auto; max-height: none; }
+}
+.full-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.img-caption-light {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+/* ─── SECTION 8: SERVICES ────────────────────────── */
+#services { background: var(--sand); }
+.video-card {
+  grid-column: 1 / -1;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.service-card {
+  background: var(--white);
+  border-radius: 22px;
+  padding: 2.5rem;
+  border: 1px solid rgba(58,125,44,0.12);
+  transition: box-shadow 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.service-card:hover {
+  box-shadow: 0 12px 40px rgba(30,70,32,0.1);
+  transform: translateY(-3px);
+}
+.service-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+.service-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+.service-head .service-icon { margin-bottom: 0; flex-shrink: 0; }
+.service-head h3 { margin-bottom: 0; }
+.service-photo {
+  margin: 1.5rem 0 0.25rem;
+  border-radius: 14px;
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: 0 6px 24px rgba(30,70,32,0.12);
+}
+.service-photo img { width: 100%; height: auto; display: block; }
+.service-card h3 {
+  font-size: 1.3rem;
+  color: var(--forest);
+  margin-bottom: 0.75rem;
+}
+.service-card > p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #4a4a4a;
+  margin-bottom: 1rem;
+}
+.service-card p a {
+  color: var(--grass);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.service-card p a:hover { color: var(--tangerine); }
+.deliverables-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tangerine);
+  margin: 1rem 0 0.5rem;
+}
+.deliverables-list {
+  list-style: none;
+  padding: 0;
+}
+.deliverables-list li {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #4a4a4a;
+  padding: 0.4rem 0 0.4rem 1.4rem;
+  position: relative;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.deliverables-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--soil);
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+.service-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  background: rgba(58,125,44,0.1);
+  color: var(--grass);
+  letter-spacing: 0.02em;
+}
+.video-wrapper {
+  margin: 2rem 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.12);
+  background: #000;
+}
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.video-wrapper iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+  border: none;
+}
+.yt-embed {
+  max-width: 860px;
+  margin: 3rem auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+}
+.yt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 980px;
+  margin: 0 auto 1rem;
+}
+@media (max-width: 700px) {
+  .yt-grid { grid-template-columns: 1fr; }
+}
+.yt-grid--single { grid-template-columns: 1fr; max-width: 980px; }
+.yt-embed iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+  border: none;
+}
+.yt-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  color: #555;
+  text-align: center;
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.services-cta {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 3rem;
+  background: rgba(255,255,255,0.6);
+  border-radius: 24px;
+}
+.cta-band {
+  padding: 0 1.5rem;
+}
+.cta-band .services-cta {
+  margin: 0 auto 4rem;
+  max-width: 900px;
+}
+.cta-band--soil {
+  background: var(--soil);
+  padding: 3rem 1.5rem;
+}
+.cta-band--soil .services-cta {
+  background: transparent;
+  color: var(--yellow);
+  text-align: center;
+  max-width: 820px;
+  margin: 3rem auto;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.75rem;
+}
+.cta-band--soil .services-cta p {
+  color: var(--white);
+  margin: 0;
+  max-width: 620px;
+}
+.btn-gold {
+  background: var(--yellow);
+  color: var(--soil);
+  box-shadow: 0 4px 18px rgba(245,200,66,0.4);
+}
+.btn-gold:hover { background: #e6b62f; color: var(--soil); box-shadow: 0 8px 28px rgba(245,200,66,0.5); }
+.services-cta p {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--forest);
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─── SECTION 9: PROJECTS ────────────────────────── */
+#projects {
+  background: var(--soil);
+  color: var(--cream);
+}
+#projects .section-title { color: var(--yellow); }
+#projects .section-sub { color: var(--white); }
+#projects .section-label { color: var(--tangerine); }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.project-card {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  aspect-ratio: 4/3;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.project-card:hover img { transform: scale(1.06); }
+.project-card.diamante-card img { filter: saturate(1.5) contrast(1.05); }
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20,45,20,0.9) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}
+.project-card:hover .project-overlay { opacity: 1; }
+.project-overlay h3 {
+  font-size: 1.05rem;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+.project-overlay p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--lime);
+  letter-spacing: 0.05em;
+}
+/* Always-visible bottom strip */
+.project-bottom {
+  background: rgba(20,45,20,0.75);
+  padding: 0.85rem 1rem;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+}
+.project-bottom h3 {
+  font-size: 0.95rem;
+  color: var(--white);
+  margin-bottom: 0.15rem;
+}
+.project-bottom p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--lime);
+  letter-spacing: 0.04em;
+}
+
+/* ─── SECTION 10: TRANSFORMATIONS ───────────────── */
+#transformations { background: var(--cream); }
+.transform-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.transform-pair {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  background: var(--white);
+}
+.transform-pair-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.transform-side {
+  position: relative;
+  aspect-ratio: 1/1;
+  background: #ddd;
+  overflow: hidden;
+}
+.transform-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.transform-label {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  font-weight: 700;
+}
+.label-before {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+.label-after {
+  background: var(--grass);
+  color: var(--white);
+}
+.transform-title {
+  padding: 1rem 1.25rem;
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  color: var(--forest);
+  text-align: center;
+}
+/* Placeholder "before/after" visuals using CSS art */
+.before-visual {
+  background: linear-gradient(135deg, #c8a87a 0%, #a07850 40%, #8a6840 100%);
+}
+.after-visual {
+  background: linear-gradient(135deg, #3A7D2C 0%, #1E4620 50%, #2d6b1e 100%);
+}
+.transform-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-align: center;
+  padding: 1rem;
+  line-height: 1.5;
+}
+.before-visual .transform-placeholder { color: rgba(255,255,255,0.7); }
+.after-visual .transform-placeholder { color: rgba(255,255,255,0.85); }
+
+/* ─── SECTION 11: WHY REGENESIS ──────────────────── */
+#why {
+  background: var(--ocean);
+  color: var(--white);
+}
+#why .section-title { color: var(--yellow); }
+#why .section-label { color: var(--lime); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+.stat-block {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: background 0.3s;
+}
+.stat-block:hover { background: rgba(255,255,255,0.18); }
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--yellow);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stat-desc {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.65;
+}
+.differentiators {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.diff-item {
+  padding: 1.5rem;
+  border-left: 3px solid var(--lime);
+  background: rgba(255,255,255,0.06);
+  border-radius: 0 12px 12px 0;
+}
+.diff-item p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.85);
+}
+.why-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 3rem 0 0;
+  align-items: stretch;
+}
+.why-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.why-card {
+  padding: 1.75rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-left: 4px solid var(--lime);
+  border-radius: 0 16px 16px 0;
+  transition: background 0.3s, transform 0.3s;
+}
+.why-card:hover { background: rgba(255,255,255,0.18); transform: translateX(4px); }
+.why-card-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+.why-card-stat .stat-num {
+  font-size: 2.6rem;
+  margin-bottom: 0;
+  color: var(--yellow);
+}
+.why-card-stat-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+.why-card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.88);
+}
+.why-videos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+}
+.why-video {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+  line-height: 0;
+}
+.why-video iframe {
+  border: 0;
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+}
+@media (max-width: 900px) {
+  .why-layout { grid-template-columns: 1fr; }
+}
+
+/* ─── SECTION 12: TESTIMONIALS ───────────────────── */
+#testimonials { background: var(--cream); }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.testimonial-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 3px 20px rgba(30,70,32,0.07);
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(30,70,32,0.13);
+}
+.quote-mark {
+  font-family: 'Fraunces', serif;
+  font-size: 5rem;
+  line-height: 0.6;
+  color: var(--tangerine);
+  opacity: 0.25;
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
+  pointer-events: none;
+  user-select: none;
+}
+.testimonial-card blockquote {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #4a4a4a;
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
+  padding-top: 1.5rem;
+}
+.reviewer-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--grass);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.reviewer-loc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  color: #888;
+  margin-top: 0.2rem;
+}
+.leaf-accent {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.25rem;
+  opacity: 0.08;
+}
+
+/* ─── SECTION 13: CLOSING CTA ────────────────────── */
+#cta-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem;
+}
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  background: url('images/cta-bg.webp') center center / cover no-repeat;
+}
+.cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(20,45,20,0.6), rgba(30,10,5,0.82));
+}
+.cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+.cta-content h2 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.cta-content p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 1rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-small {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem !important;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.55) !important;
+  margin-top: 3rem !important;
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+.btn-large {
+  padding: 1.1rem 3rem;
+  font-size: 1.1rem;
+}
+
+/* ─── FREE THE FOOD BANNER ───────────────────────── */
+.food-banner {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  line-height: 0;
+}
+.food-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.food-banner-quote {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  transform: translateX(-50%);
+  width: min(760px, 88%);
+  background: rgba(30,70,32,0.42);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 14px;
+  padding: 1.25rem 1.75rem;
+  text-align: center;
+  line-height: 1.4;
+}
+.food-banner-quote blockquote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.4rem);
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+.food-banner-quote cite {
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--yellow);
+}
+@media (max-width: 600px) {
+  .food-banner-quote { bottom: 4%; padding: 0.85rem 1rem; width: 92%; }
+}
+
+/* ─── SECTION 14: FOOTER ─────────────────────────── */
+footer {
+  background: var(--soil);
+  color: var(--yellow);
+  padding: 4rem 1.5rem 2.5rem;
+}
+/* ─── FOOTER ─────────────────────────────────────────────── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  align-items: center;
+}
+.footer-brand-mark { text-transform: uppercase; }
+.footer-brand-line1 { color: var(--yellow); }
+.footer-brand-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--yellow);
+  line-height: 1.35;
+  max-width: 420px;
+  margin-bottom: 0.5rem;
+}
+.footer-tagline {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--yellow);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.social-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .social-links { justify-content: flex-start; }
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(245,200,66,0.4);
+  color: var(--yellow);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+  font-size: 0;
+}
+.social-link svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--yellow);
+  transition: fill 0.2s;
+}
+.social-link:hover {
+  background: var(--tangerine);
+  border-color: var(--tangerine);
+  transform: translateY(-2px);
+}
+.social-link:hover svg { fill: var(--white); }
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.25rem;
+}
+.footer-bottom {
+  max-width: 1120px;
+  margin: 2rem auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer-copy {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--yellow);
+}
+
+
+/* ─── GET STARTED FORM ───────────────────────────── */
+#get-started {
+  background: var(--white);
+  padding: 6rem 1.5rem;
+}
+.form-container {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--cream);
+  border-radius: 28px;
+  padding: 3rem;
+  box-shadow: 0 8px 48px rgba(30,70,32,0.1);
+  border: 1px solid rgba(58,125,44,0.1);
+}
+.form-container h2 {
+  font-size: 2rem;
+  color: var(--forest);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.form-container .form-sub {
+  font-size: 0.95rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.form-group {
+  margin-bottom: 1.25rem;
+}
+.form-group label {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grass);
+  margin-bottom: 0.4rem;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 2px solid rgba(58,125,44,0.15);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  background: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--grass);
+  box-shadow: 0 0 0 3px rgba(58,125,44,0.1);
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  font-size: 1.05rem;
+}
+.form-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #999;
+  margin-top: 0.75rem;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 1024px) {
+  .travis-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .ethics-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .differentiators { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 4rem 1.25rem; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .problem-card:last-child:nth-child(odd) { grid-column: span 1; max-width: 100%; }
+  .ethics-grid { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .video-card {
+  grid-column: 1 / -1;
+}
+.services-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .transform-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+  .timeline::before { left: 26px; }
+  .timeline-step {
+    grid-template-columns: 52px 1fr;
+    column-gap: 1.25rem;
+    align-items: start;
+  }
+  .timeline-step:nth-child(odd) .step-text,
+  .timeline-step:nth-child(even) .step-text {
+    grid-column: 2;
+    text-align: left;
+  }
+  .timeline-step:nth-child(odd) .step-num,
+  .timeline-step:nth-child(even) .step-num {
+    grid-column: 1;
+  }
+  .allies-logos { gap: 1.5rem; }
+}
+
+@media (max-width: 520px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .form-container { padding: 2rem 1.25rem; }
+}
+
+/* ─── TEXT ORPHAN PREVENTION ─────────────────────────── */
+p, .travis-bio, .ethics-card p, .feature-block p, .service-card > p,
+.problem-card p, .testimonial-card blockquote {
+  text-wrap: pretty;
+}
+/* Heading sub-texts: balance line lengths to avoid one/two-word orphans */
+.section-sub, .stages-intro, .services-cta p, .cta-content p, .hero-content p {
+  text-wrap: balance;
+}
+.section-sub { max-width: 62ch; }
+.ethics-card p { max-width: 32ch; }
+.problem-card p { max-width: 38ch; }
+.feature-block p { max-width: 34ch; }
+.service-card > p { max-width: 46ch; }
+.travis-bio { max-width: 54ch; }
+.testimonial-card blockquote { max-width: 44ch; }
+.hero-content p { max-width: 52ch; }
+.cta-content p { max-width: 56ch; }
+
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────── -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="#hero" class="nav-logo">
+    <img src="images/logo.webp" alt="REGENESIS logo mark">
+    <span class="nav-brand">
+      <span class="nav-brand-name"><span class="brand-mark">REGENESIS:</span> Tropical Food Forest Design</span>
+      <span class="nav-brand-tag">&amp; Regenerative Community Development</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#purpose">About</a></li>
+    <li><a href="#process">Approach</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="https://permavida.org/regenesis-get-started" target="_blank" rel="noopener" class="nav-cta">Get Started</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <ul>
+    <li><a href="#hero" class="mobile-link">Home</a></li>
+    <li><a href="#purpose" class="mobile-link">About</a></li>
+    <li><a href="#process" class="mobile-link">Approach</a></li>
+    <li><a href="#services" class="mobile-link">Services</a></li>
+    <li><a href="#projects" class="mobile-link">Projects</a></li>
+    <li><a href="#testimonials" class="mobile-link">Testimonials</a></li>
+    <li><a href="https://permavida.org/regenesis-get-started" target="_blank" rel="noopener" class="mobile-link">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────── -->
+<section id="hero" aria-label="Hero section">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="reveal italic">Regenerating Land,<br>Cultivating Community</h1>
+    <p class="reveal reveal-delay-1">We help families and land stewards transform degraded landscapes into abundant, self-sustaining food forests through tropical agroforestry, participatory design, and hands-on support.</p>
+    <div class="reveal reveal-delay-2">
+      <a href="https://permavida.org/regenesis-get-started" target="_blank" rel="noopener" class="btn btn-lime">Get Started</a>
+    </div>
+    <p class="hero-sub reveal reveal-delay-3">Serving Costa Rica's Southern Zone<br>Bilingual (English &amp; Spanish)</p>
+  </div>
+  <div class="scroll-arrow" aria-hidden="true">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="15" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+      <path d="M10 14L16 20L22 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ─── PROBLEM ───────────────────────────────────── -->
+<section id="problem" aria-labelledby="problem-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">The Challenge</div>
+      <h2 class="section-title" id="problem-title">Why Most Tropical Projects Struggle</h2>
+    </div>
+    <div class="problem-grid">
+      <article class="problem-card reveal reveal-delay-1">
+        <h3>Costly Trial &amp; Error</h3>
+        <p>Inspiring visions with unrealistic expectations lead to drains of time, energy, and other resources.</p>
+      </article>
+      <article class="problem-card reveal reveal-delay-2">
+        <h3>No Long-Term Strategy</h3>
+        <p>Resources are invested without understanding ecological succession or the natural rhythms of tropical systems.</p>
+      </article>
+      <article class="problem-card reveal reveal-delay-3">
+        <h3>Improper Planting</h3>
+        <p>Trees planted in the wrong order or spacing quickly become an unmanageable jungle, beautiful but unproductive.</p>
+      </article>
+      <article class="problem-card reveal reveal-delay-4">
+        <h3>Overwhelming Maintenance</h3>
+        <p>Without thoughtful design, food forests become a source of stress and exhaustion rather than abundance and joy.</p>
+      </article>
+      <article class="problem-card reveal reveal-delay-5">
+        <h3>Organizational Friction</h3>
+        <p>Communities and teams lack functional frameworks for decision making and conflict resolution, leading to drama and stagnation.</p>
+      </article>
+      <article class="problem-card problem-card--solution reveal reveal-delay-5">
+        <span class="solution-label">The Solution</span>
+        <h3>Systems That Get Better With Time</h3>
+        <p>We design food forests that become more abundant, resilient, and self-sustaining year after year, working with nature instead of against it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PURPOSE ───────────────────────────────────── -->
+<section id="purpose" aria-labelledby="purpose-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">Our Mission</div>
+      <h2 class="section-title" id="purpose-title">Creating Heaven on Earth,<br>One Hectare at a Time</h2>
+      <p class="section-sub" style="margin:0 auto;">As humanity awakens to the need to heal our relationship with Mother Earth, REGENESIS supports individuals and organizations in more effectively applying resources toward Earth Care, People Care, and Fair Share. When we work together for the good of all, we experience Heaven on Earth.</p>
+    </div>
+    <div class="ethics-grid">
+      <article class="ethics-card reveal reveal-delay-1">
+        <span class="ethics-icon" aria-hidden="true">🌍</span>
+        <h3>Earth Care</h3>
+        <p>Caring for living and non-living systems: soils, species, water, and air, as the foundation of all human wellbeing.</p>
+      </article>
+      <article class="ethics-card reveal reveal-delay-2">
+        <span class="ethics-icon" aria-hidden="true">👥</span>
+        <h3>People Care</h3>
+        <p>Providing access to the resources necessary for food, shelter, education, and meaningful community connection.</p>
+      </article>
+      <article class="ethics-card reveal reveal-delay-3">
+        <span class="ethics-icon" aria-hidden="true">⚖️</span>
+        <h3>Fair Share</h3>
+        <p>Limiting consumption and redirecting surplus time, money, and materials toward Earth Care and People Care.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FREE THE FOOD BANNER ─────────────────────── -->
+<section class="food-banner" aria-label="Free the food banner">
+  <img src="images/food-banner.webp" alt="Travis — Free the Food" />
+  <div class="food-banner-quote">
+    <blockquote>"The true purpose of farming is not the growing of food, rather, the cultivation and perfection of human beings."</blockquote>
+    <cite>— Fukuoka Masanobu</cite>
+  </div>
+</section>
+
+<!-- ─── TRAVIS ────────────────────────────────────── -->
+<section id="about" aria-labelledby="travis-title">
+  <div class="container">
+    <div class="travis-grid">
+      <div class="travis-photo reveal">
+        <img src="images/travis-photo.webp" alt="Travis Britzke, Founder &amp; Lead Designer of Regenesis Permaculture Costa Rica">
+      </div>
+      <div class="travis-text">
+        <h2 class="reveal" id="travis-title">Travis Britzke</h2>
+        <div class="role-tags reveal">
+          <span class="role-tag">Socio-Biologist</span>
+          <span class="role-tag">Permaculture Designer &amp; Trainer</span>
+          <span class="role-tag">Syntropic Food Forest Gardener</span>
+        </div>
+        <ul class="travis-roles reveal">
+          <li><strong>Founder &amp; Lead Designer</strong>, Regenesis Permaculture Costa Rica</li>
+          <li><strong>Vice President</strong>, Community Carbon Trees Association</li>
+          <li><strong>Permaculture Director</strong>, Perma Vida Foundation</li>
+          <li><strong>Co-Founder &amp; Board Member</strong>, Diamante Bridge Collective</li>
+          <li class="travis-lang"><strong>Fluent in English &amp; Spanish</strong></li>
+        </ul>
+        <p class="travis-bio reveal">Nurturing relations between people and planet since 1999, Travis brings 22+ years of experience living and working within tropical intentional and indigenous communities, immersed in traditional farming and regenerative agroforestry systems. He began his journey as a Peace Corps Volunteer and later as an Assistant Trainer in Panama. He has supported over 20 homestead and community projects with social and permaculture leadership from Guatemala to Peru, including: Comuna Rhiannon, Ceibo-Bikis, Awakening Soul Sanctuary, Finca Fruition, Fuente Verde, Diamante Luz, Finca TierraS, and Amoras. His university thesis explored <em>"Human Nature and the Village as a Catalyst for Well-Being"</em> and his daily work continues to incarnate that vision.</p>
+      </div>
+    </div>
+    <div class="travis-cta reveal">
+      <strong>Homesteading in the tropics is a wild adventure!</strong><br>
+      To avoid frustration and regrets, choose your guides wisely.
+    </div>
+  </div>
+</section>
+
+<!-- ─── ECO-ALLIES ────────────────────────────────── -->
+<section id="allies" aria-labelledby="allies-title">
+  <div class="container text-center">
+    <div class="reveal">
+      <div class="section-label">Our Network</div>
+      <h2 class="section-title" id="allies-title">Regenerative Allies</h2>
+      <p class="section-sub">REGENESIS collaborates with these organizations to create systemic change across Costa Rica.</p>
+    </div>
+    <div class="allies-logos">
+      <a href="#allies" class="ally-logo reveal reveal-delay-1" aria-label="Community Carbon Trees">
+        <img src="images/ally-community-carbon-trees.webp" alt="Community Carbon Trees Costa Rica logo">
+      </a>
+      <a href="#allies" class="ally-logo reveal reveal-delay-2" aria-label="Perma Vida Foundation">
+        <img src="images/ally-perma-vida.webp" alt="Perma Vida Foundation logo">
+      </a>
+      <a href="#allies" class="ally-logo reveal reveal-delay-3" aria-label="Diamante Bridge Collective">
+        <img src="images/ally-diamante-bridge.webp" alt="Diamante Bridge Collective logo">
+      </a>
+      <a href="#allies" class="ally-logo reveal reveal-delay-4" aria-label="Regenerate Your Reality">
+        <img src="images/ally-regenerate-reality.webp" alt="Regenerate Your Reality logo">
+      </a>
+      <a href="#allies" class="ally-logo reveal reveal-delay-5" aria-label="EcoMaste Lodge">
+        <img src="images/ally-ecomaste.webp" alt="EcoMaste Lodge Retreat and Learning Center logo">
+      </a>
+      <a href="#allies" class="ally-logo reveal reveal-delay-6" aria-label="Vida Autentica">
+        <img src="images/ally-vida-autentica.webp" alt="Vida Autentica logo">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ───────────────────────────────────── -->
+<section id="process" aria-labelledby="process-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">Our Approach</div>
+      <h2 class="section-title" id="process-title">Designing with Land &amp; Community</h2>
+      <p class="section-sub">We use participatory design methods, from hand-drawn food forest layers to interactive digital maps, ensuring every stakeholder understands and owns the vision.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-step reveal">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>Listen</h3>
+          <p>Understanding people, place, culture, and vision. Every great design begins with deep listening to the land and its stewards.</p>
+        </div>
+        <div class="step-img"><img src="images/process-step-1.webp" alt="Land stewards and designers in a participatory listening session" loading="lazy"></div>
+      </div>
+      <div class="timeline-step reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>Observe</h3>
+          <p>Site analysis: mapping water flows, sun paths, soil types, existing ecology, and opportunity zones across the property.</p>
+        </div>
+        <div class="step-img"><img src="images/process-step-2.webp" alt="Site analysis overlay mapping water flows, terrain and opportunity zones" loading="lazy"></div>
+      </div>
+      <div class="timeline-step reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>Design</h3>
+          <p>Collaborative workshops using visual tools and facilitated consensus to co-create a master plan everyone believes in.</p>
+        </div>
+        <div class="step-img step-img--contain"><img src="images/process-step-3-map.webp" alt="Cross-section food forest design overlay showing service trail, planting strips, tree layer and water access with measurements" loading="lazy"></div>
+      </div>
+      <div class="timeline-step reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <h3>Implement</h3>
+          <p>Providing hands-on guidance and support for land stewards and work crews as the design comes to life on the ground.</p>
+        </div>
+        <div class="step-img"><img src="images/process-step-4.webp" alt="Work crew implementing the planting design on site" loading="lazy"></div>
+      </div>
+      <div class="timeline-step reveal reveal-delay-4">
+        <div class="step-num">5</div>
+        <div class="step-text">
+          <h3>Regenerate</h3>
+          <p>Continuous adaptation, building local capacity, and supporting long-term self-sufficiency so the ecosystem thrives without maintenance.</p>
+        </div>
+        <div class="step-img"><img src="images/process-step-5.webp" alt="A thriving young food forest regenerating the land" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="process-visual reveal">
+      <img src="images/process-visual.webp" alt="Pathway through a syntropic food forest at Diamante Luz Community, San Salvador, Costa Rica">
+    </div>
+    <p class="img-caption reveal">We co-create hand-illustrated sketches with land stewards to map their future forest layers.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band cta-band--soil" aria-label="Call to action">
+  <div class="services-cta reveal">
+    <p>Tell us about your project and schedule your free discovery call today.</p>
+    <a href="https://permavida.org/regenesis-get-started" target="_blank" rel="noopener" class="btn btn-gold">Get Started</a>
+  </div>
+</section>
+
+
+<!-- ─── SYNTROPIC ──────────────────────────────────── -->
+<section id="syntropic" aria-labelledby="syntropic-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">Our Process</div>
+      <h2 class="section-title" id="syntropic-title">Regenerating Land &amp; Culture Through Syntropic Agroforestry</h2>
+      <p class="section-sub">We emphasize practical applications inspired by the pioneering work of Ernst Götsch, growing systems that become more abundant and self-managing with time.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-block reveal reveal-delay-1">
+        <span class="feature-icon" aria-hidden="true">🌳</span>
+        <h3>Ecological Succession &amp; Stratification</h3>
+        <p>Mimicking natural forest layers over time to create stable, self-managing ecosystems that require less and less intervention</p>
+      </article>
+      <article class="feature-block reveal reveal-delay-2">
+        <span class="feature-icon" aria-hidden="true">🔄</span>
+        <h3>Biomass Generation &amp; Soil Building</h3>
+        <p>Creating closed-loop fertility on-site so the land feeds itself, turning cut vegetation into rich mulch and living soil</p>
+      </article>
+      <article class="feature-block reveal reveal-delay-3">
+        <span class="feature-icon" aria-hidden="true">🍎</span>
+        <h3>Productive Diversity</h3>
+        <p>Optimizing water retention and long-term yield abundance through multi-species planting, stratification, and companion planting</p>
+      </article>
+    </div>
+    <h3 class="stages-heading reveal">The System Progresses Through Successional Stages</h3>
+    <p class="stages-intro reveal">Each layer is designed so the faster species nurse the slower, higher-value trees toward a stable climax forest.</p>
+    <div class="stages-vertical reveal">
+      <figure class="stage-row">
+        <div class="stage-row-img"><img src="images/stage-row-1.webp" alt="Year One planting layout: pioneer and support species across two placentas, 0-12 months"></div>
+        <figcaption class="stage-row-text">
+          <h3>Year One <span class="stage-years">0–12 Months</span></h3>
+          <p>Fast-growing pioneer and support species establish the system, rapidly building biomass, breaking up compacted soil, and creating the protective conditions the slower, higher-value trees need to thrive.</p>
+        </figcaption>
+      </figure>
+      <figure class="stage-row">
+        <div class="stage-row-img"><img src="images/stage-row-2.webp" alt="Early Secondary stage, Years 2-3: papaya, moringa, banana and emerging canopy species"></div>
+        <figcaption class="stage-row-text">
+          <h3>Early Secondary <span class="stage-years">Years 2–3</span></h3>
+          <p>The first productive canopy emerges and biomass becomes abundant, as papaya, banana, and moringa begin yielding while continuously feeding the soil with organic matter.</p>
+        </figcaption>
+      </figure>
+      <figure class="stage-row">
+        <div class="stage-row-img"><img src="images/stage-row-3.webp" alt="Mid Secondary stage, Years 3-5: maturing canopy with plantain, pataxte and cacao understory"></div>
+        <figcaption class="stage-row-text">
+          <h3>Mid Secondary <span class="stage-years">Years 3–5</span></h3>
+          <p>As the system matures, the canopy thickens, perennials begin yielding well, and the understory fills in beneath the growing trees.</p>
+        </figcaption>
+      </figure>
+      <figure class="stage-row">
+        <div class="stage-row-img"><img src="images/stage-row-4.webp" alt="Late Secondary stage, Years 6-12: tall emergents with breadnut, dragon's blood, cacao and spice layers"></div>
+        <figcaption class="stage-row-text">
+          <h3>Late Secondary <span class="stage-years">Years 6–12</span></h3>
+          <p>High-value timber and tree crops come to dominate the system, with tall emergents sheltering a diverse, productive layer of fruit, nut, and spice species below.</p>
+        </figcaption>
+      </figure>
+      <figure class="stage-row">
+        <div class="stage-row-img"><img src="images/stage-row-5.webp" alt="Climax syntropic food forest cross-section, Years 13-25: emergent, high, medium and ground layer species in harmony"></div>
+        <figcaption class="stage-row-text">
+          <h3>Climax <span class="stage-years">Years 13–25+</span></h3>
+          <p>The food forest reaches a mature, self-managing, multi-strata state, producing abundant yields across every layer while sustaining its own fertility with minimal intervention.</p>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="handdrawn-pair reveal">
+      <figure>
+        <img src="images/handdrawn-1.webp" alt="Watercolor illustration of food forest tree layer strata showing Guanacaste emergent, Avocado and Guyaba high layer, Cacao mid layer, and Vanilla and ground herbs">
+      </figure>
+      <figure>
+        <img src="images/handdrawn-2.webp" alt="Hand-drawn illustration of forest strata: Guanacaste and hardwoods emergent above Avocado, Carao, Cacao and Black Pepper">
+      </figure>
+    </div>
+    <p class="img-caption-light reveal">Hand-illustrated food forest stratification — participatory sketches we co-create with land stewards to map the layers of the future forest.</p>
+  </div>
+</section>
+
+<!-- ─── SERVICES ──────────────────────────────────── -->
+<section id="services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title" id="services-title">Services</h2>
+    </div>
+    <div class="services-grid">
+      <!-- Card 1 -->
+      <article class="service-card reveal">
+        <figure class="service-photo" style="margin-top:0;margin-bottom:1.25rem;">
+          <img src="images/service-design.webp" alt="Hand-drawn permaculture design overlay on a satellite image of a property">
+        </figure>
+        <div class="service-head"><div class="service-icon" aria-hidden="true">📐</div><h3>Site Analysis, Permaculture Design, and Digital Mapping</h3></div>
+        <p>We create detailed contextual assessments and regenerative master plans for new land seekers and existing land stewards using satellite imagery layovers.</p>
+        <ul class="deliverables-list">
+          <li>Maps of water flows, sun paths, soil types, ecology, and opportunity</li>
+          <li>Water management and access plan</li>
+          <li>Soil regeneration and animal integration strategy</li>
+          <li>Nursery development and successional planting strategy</li>
+          <li>Seasonal planting, pruning, and harvesting calendar</li>
+          <li>Phased implementation roadmap</li>
+        </ul>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="service-card reveal reveal-delay-1">
+        <figure class="service-photo" style="margin-top:0;margin-bottom:1.25rem;">
+          <img src="images/service-agroforestry.webp" alt="Hand-drawn food forest mapping overlay used to plan a retrofit design">
+        </figure>
+        <div class="service-head"><div class="service-icon" aria-hidden="true">🌳</div><h3>Agroforestry Implementation and Empowerment</h3></div>
+        <p>We provide hands-on field support and ongoing guidance for homesteads, farms, and community initiatives. We speak fluent English and Spanish to put your team on the fast track to success and fulfillment.</p>
+        <ul class="deliverables-list">
+          <li>Food forest retrofitting with support species integration</li>
+          <li>Succession management and adaptive design refinement</li>
+          <li>Crew training and oversight</li>
+          <li>On-site and remote consulting</li>
+        </ul>
+        <div style="margin-top:2.5rem;">
+          <div class="service-head"><div class="service-icon" aria-hidden="true">🌱</div><h3>Fruit Trees for Sale</h3></div>
+            <p>Visit our <a href="https://docs.google.com/spreadsheets/d/1Dch8ATdUMu74vzEIiLf05dqEOAW-Y507A0NJW6tPgOI/edit?usp=sharing" target="_blank" rel="noopener">nursery inventory</a> here and then <a href="mailto:regenesis@permavida.org">send us a message</a>.</p>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="service-card reveal reveal-delay-3">
+        <figure class="service-photo" style="margin-top:0;margin-bottom:1.25rem;">
+          <img src="images/service-community.webp" alt="Travis leading a hands-on agroforestry training with a group in a food forest">
+        </figure>
+        <div class="service-head"><div class="service-icon" aria-hidden="true">🏡</div><h3>Participatory Community Development &amp; Custom Trainings</h3></div>
+        <p>We offer collaborative design for regenerative neighborhoods, ecovillages, community initiatives, indigenous partnerships, and bioregional projects. We believe the design process should strengthen human relationships just as deeply as it shapes the physical landscape. Our trainings weave practical land skills together with the social systems communities need to truly thrive, ranging from 1-day workshops to 1-month immersions, with year-long apprenticeships coming soon.</p>
+        <div class="deliverables-label">We Teach &amp; Model</div>
+        <div class="service-tags">
+          <span class="service-tag">Sociocracy</span>
+          <span class="service-tag">Holistic Decision-Making</span>
+          <span class="service-tag">Nonviolent Communication</span>
+          <span class="service-tag">Way of Council</span>
+          <span class="service-tag">Ancestral Permaculture</span>
+          <span class="service-tag">Embodied Permaculture</span>
+          <span class="service-tag">Food Forest Design</span>
+          <span class="service-tag">Syntropic Agroforestry</span>
+          <span class="service-tag">Soil Building</span>
+          <span class="service-tag">Water Harvesting</span>
+          <span class="service-tag">Tree Pruning</span>
+          <span class="service-tag">Perennial Gardens</span>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="service-card reveal reveal-delay-2">
+        <div class="service-head"><div class="service-icon" aria-hidden="true">🪓</div><h3>Biomass Chipping &amp; Mulching Service</h3></div>
+        <p>Watch how we turn on-site brushwood and vegetation into rich mulch. This is a core technique in syntropic agroforestry that builds fertility, retains moisture, and feeds the next cycle of growth.</p>
+        <div class="video-wrapper" style="margin-top:1.5rem;flex:1;display:flex;align-items:center;justify-content:center;">
+          <iframe
+            src="https://www.youtube.com/embed/9vAM3ok3ivk?rel=0&modestbranding=1"
+            title="Chipping vegetation into mulch"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin"
+            style="border:0;width:100%;max-width:320px;aspect-ratio:9/16;display:block;margin:0.5rem auto 0;border-radius:14px;">
+          </iframe>
+        </div>
+      </article>
+    </div>
+    <!-- YouTube videos -->
+    <p class="yt-label reveal" style="margin-top:3rem;margin-bottom:1rem;">Watch: Tropical Syntropic Consortium Case Study</p>
+    <div class="yt-grid yt-grid--single reveal">
+      <div class="yt-item">
+        <iframe
+          src="https://www.youtube.com/embed/GVgPP_TANcY?rel=0&modestbranding=1"
+          title="REGENESIS project video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+          style="border:0;width:100%;aspect-ratio:16/9;display:block;border-radius:14px;">
+        </iframe>
+      </div>
+    </div>
+        <div class="services-cta reveal">
+      <p>Tell us about your project and schedule your free discovery call today.</p>
+      <a href="https://permavida.org/regenesis-get-started" target="_blank" rel="noopener" class="btn">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ───────────────────────────────────── -->
+<section id="projects" aria-labelledby="projects-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">Our Portfolio</div>
+      <h2 class="section-title" id="projects-title">Recent Projects</h2>
+      <p class="section-sub">Every landscape is unique. Here's a sample of our recent design work across Costa Rica's Southern Zone.</p>
+    </div>
+    <div class="projects-grid">
+      <article class="project-card reveal">
+        <img src="images/project-amoras.webp" alt="Amoras, Dominicalito — regenerative agroforestry land team planting trees">
+        <div class="project-bottom">
+          <h3>Amoras, Dominicalito</h3>
+          <p>Agroforestry Support, Over 1,000 Trees Planted</p>
+        </div>
+      </article>
+      <article class="project-card reveal reveal-delay-1">
+        <img src="images/project-tierras.webp" alt="Finca TierraS, Diamante Valley — agroforestry support and syntropic layout design">
+        <div class="project-bottom">
+          <h3>Finca TierraS, Diamante Valley</h3>
+          <p>Agroforestry Support &amp; Syntropic Layout</p>
+        </div>
+      </article>
+      <article class="project-card reveal reveal-delay-2">
+        <img src="images/project-richie.webp" alt="Richie's Homestead, San Salvador — family food forest and land regeneration">
+        <div class="project-bottom">
+          <h3>Richie&rsquo;s Homestead, San Salvador</h3>
+          <p>Family Food Forest &amp; Land Regeneration</p>
+        </div>
+      </article>
+      <article class="project-card diamante-card reveal reveal-delay-3">
+        <img src="images/project-diamante-luz.webp" alt="Diamante Bridge Collective, San Salvador — syntropic design and installation">
+        <div class="project-bottom">
+          <h3>Diamante Bridge Collective, San Salvador</h3>
+          <p>Syntropic Design and Installation</p>
+        </div>
+      </article>
+      <article class="project-card reveal reveal-delay-1">
+        <img src="images/project-free-the-food.webp" alt="Free the Food Initiative, Diamante Valley — community food production and distribution">
+        <div class="project-bottom">
+          <h3>Free the Food Initiative, Diamante Valley</h3>
+          <p>Community Food Production &amp; Distribution</p>
+        </div>
+      </article>
+      <article class="project-card reveal reveal-delay-2">
+        <img src="images/project-grace2.webp" alt="Grace 2 Community, Pérez Zeledón — site analysis and macro plan design">
+        <div class="project-bottom">
+          <h3>Grace 2 Community, Pérez Zeledón</h3>
+          <p>Site Analysis &amp; Macro Plan</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRANSFORMATIONS ───────────────────────────── -->
+<section id="transformations" aria-labelledby="transform-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">Before &amp; After</div>
+      <h2 class="section-title" id="transform-title">What Transformation Looks Like</h2>
+      <p class="section-sub">Every project starts with possibility. Here's what regeneration can do over time.</p>
+    </div>
+    <div class="transform-grid">
+      <div class="transform-pair reveal">
+        <div class="transform-pair-inner">
+          <div class="transform-side">
+            <span class="transform-label label-before">Before</span>
+            <img src="images/transform-1-before.webp" alt="Richie's Homestead before regeneration">
+          </div>
+          <div class="transform-side">
+            <span class="transform-label label-after">After</span>
+            <img src="images/transform-1-after.webp" alt="Richie's Homestead after regeneration">
+          </div>
+        </div>
+        <div class="transform-title">Richie's Homestead, San Salvador, Costa Rica</div>
+      </div>
+      <div class="transform-pair reveal reveal-delay-1">
+        <div class="transform-pair-inner">
+          <div class="transform-side">
+            <span class="transform-label label-before">Before</span>
+            <img src="images/transform-2-before.webp" alt="Amoras before regeneration">
+          </div>
+          <div class="transform-side">
+            <span class="transform-label label-after">After</span>
+            <img src="images/transform-2-after.webp" alt="Amoras after regeneration">
+          </div>
+        </div>
+        <div class="transform-title">Diamante Luz Community, San Salvador, Costa Rica</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ─── WHY REGENESIS ──────────────────────────────── -->
+<section id="why" aria-labelledby="why-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">Our Track Record</div>
+      <h2 class="section-title" id="why-title">Why REGENESIS?</h2>
+    </div>
+    <div class="why-layout">
+      <div class="why-cards">
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-card-stat"><span class="stat-num">20+</span><span class="why-card-stat-label">Years &amp; Projects</span></div>
+          <p>We bring over two decades of tropical food forestry and cross-cultural collaboration across Latin America. In that time we have transformed more than twenty homesteads, farms, ecovillages, and community centers into thriving regenerative systems.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-card-stat"><span class="stat-num">2</span><span class="why-card-stat-label">Languages · EN · ES</span></div>
+          <p>We work fluently in both English and Spanish, bridging international clients with local teams. This bilingual fluency lets us pair deep ecological literacy with grounded, practical implementation that produces optimal results and relations.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-3">
+          <div class="why-card-stat"><span class="stat-num">∞</span><span class="why-card-stat-label">Empowered for Generations</span></div>
+          <p>Our community facilitation is rooted in proven regenerative governance, including Sociocracy, Nonviolent Communication, and the Way of Council. We do more than design your land. We empower you and your team to steward it for generations to come.</p>
+        </div>
+      </div>
+      <div class="why-videos">
+        <div class="why-video reveal reveal-delay-1">
+          <iframe
+            src="https://www.youtube.com/embed/AmvAufpWZHY?rel=0&modestbranding=1"
+            title="REGENESIS project video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="why-video reveal reveal-delay-2">
+          <iframe
+            src="https://www.youtube.com/embed/HPht0fqGepE?rel=0&modestbranding=1"
+            title="REGENESIS project video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────────────── -->
+<section id="testimonials" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <div class="section-label">Community Voice</div>
+      <h2 class="section-title" id="testimonials-title">What Our Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial-card reveal reveal-delay-1">
+        <div class="quote-mark" aria-hidden="true">"</div>
+        <blockquote>Travis is one of the most knowledgeable and grounded permaculture practitioners I've had the pleasure of working with. His depth of understanding of syntropic systems, combined with his ability to communicate complex ecological concepts clearly, makes him an invaluable guide for anyone looking to regenerate their land in Costa Rica.</blockquote>
+        <p class="reviewer-name">Jason Thomas</p>
+        <p class="reviewer-loc">Regeneration Nation Costa Rica</p>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-2">
+        <div class="quote-mark" aria-hidden="true">"</div>
+        <blockquote>Working with Travis has been transformational. He not only helped us design our food forest with incredible ecological intelligence, but he also helped our community come together around a shared vision. His facilitation skills are as strong as his horticultural knowledge.</blockquote>
+        <p class="reviewer-name">Terra Nova</p>
+        <p class="reviewer-loc">Holistic Life Tribe</p>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-3">
+        <div class="quote-mark" aria-hidden="true">"</div>
+        <blockquote>Travis nos ayudó a convertir nuestra finca en un bosque comestible productivo. Su conocimiento de la agrosilvicultura sintrópica y su capacidad de trabajar tanto con el equipo local como con los propietarios internacionales es invaluable. Altamente recomendado. <em>(Travis helped us convert our farm into a productive food forest. His knowledge and bilingual facilitation is invaluable. Highly recommended.)</em></blockquote>
+        <p class="reviewer-name">Santiago</p>
+        <p class="reviewer-loc">Molinos Verdes de Moringa</p>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-1">
+        <div class="quote-mark" aria-hidden="true">"</div>
+        <blockquote>We hired Travis to help us design our family homestead in the Southern Zone and it was the best investment we made. He understood our vision immediately and created a design that felt both ambitious and totally achievable. A year later, our land is already producing abundantly.</blockquote>
+        <p class="reviewer-name">Sam and Family</p>
+        <p class="reviewer-loc">Happy in Costa Rica</p>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-2">
+        <div class="quote-mark" aria-hidden="true">"</div>
+        <blockquote>I've worked with a lot of consultants in Costa Rica, and Travis stands out. He's patient, thorough, and deeply committed to the success of your project. He doesn't just give you a plan — he stays with you through the whole process. That kind of support is rare.</blockquote>
+        <p class="reviewer-name">Richie DC</p>
+        <p class="reviewer-loc">San Salvador, Costa Rica</p>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-3">
+        <div class="quote-mark" aria-hidden="true">"</div>
+        <blockquote>Ojalá hubiera contratado a Travis hace años. Su experiencia en agroforestería tropical es profunda y su enfoque participativo hace que todo el equipo se sienta parte del proceso. Los resultados hablan por sí mismos. <em>(I wish I had hired Travis years ago. His experience is profound and his participatory approach makes the whole team feel part of the process.)</em></blockquote>
+        <p class="reviewer-name">Miguel</p>
+        <p class="reviewer-loc">Pérez Zeledón, Costa Rica</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLOSING CTA ────────────────────────────────── -->
+<section id="cta-section" aria-labelledby="cta-title">
+  <div class="cta-bg"></div>
+  <div class="cta-overlay"></div>
+  <div class="cta-content">
+    <h2 class="reveal italic" id="cta-title">Growing a Brighter Future</h2>
+    <p class="reveal reveal-delay-1">Imagine landscapes that produce food, restore biodiversity, retain water, strengthen local economies, and bring people together around meaningful work. Through syntropic agroforestry, regenerative design, and community empowerment, we can help cultivate that future together.</p>
+    
+    <div class="reveal reveal-delay-3" style="margin-top:2rem;">
+      <a href="https://permavida.org/regenesis-get-started" target="_blank" rel="noopener" class="btn btn-lime btn-large">Start Your Journey</a>
+    </div>
+    <p class="cta-small reveal reveal-delay-4">Free discovery call<br>No obligation &middot; Bilingual support</p>
+  </div>
+</section>
+
+<!-- ─── GET STARTED ─────────────────────────── -->
+<section id="get-started" style="display:none;"></section>
+
+<!-- ─── FOOTER ────────────────────────────────────── -->
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <p class="footer-brand-text"><span class="footer-brand-line1"><span class="footer-brand-mark">REGENESIS:</span> Tropical Food Forest Design</span><br>&amp; Regenerative Community Development</p>
+      
+      
+    </div>
+    <div class="social-links">
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@regenesispermaculturecr" class="social-link" target="_blank" rel="noopener" aria-label="REGENESIS on YouTube">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.54 12 3.54 12 3.54s-7.51 0-9.38.51A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.51 9.38.51 9.38.51s7.51 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg>
+          YouTube
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/REGENESIScr" class="social-link" target="_blank" rel="noopener" aria-label="REGENESIS on Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/regenesiscr" class="social-link" target="_blank" rel="noopener" aria-label="REGENESIS on Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          Instagram
+        </a>
+        <!-- Email -->
+        <a href="mailto:regenesis@permavida.org" class="social-link" aria-label="Email REGENESIS">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.897 4 2 4.897 2 6v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2-8 5-8-5h16zm0 12H4V8.223l8 5 8-5V18z"/></svg>
+          Email
+        </a>
+      </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">&copy; Perma Vida &middot; Powered by Permaculture &amp; Pura Vida</p>
+  </div>
+</footer>
+
+<!-- ─── JAVASCRIPT ─────────────────────────────────── -->
+<script>
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* ── PARALLAX HERO ── */
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y < window.innerHeight) {
+    heroBg.style.transform = `scale(1.08) translateY(${y * 0.25}px)`;
+  }
+}, { passive: true });
+
+/* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => observer.observe(el));
+
+/* ── HAMBURGER ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileOverlay = document.getElementById('mobileOverlay');
+
+function openMenu() {
+  hamburger.classList.add('open');
+  mobileMenu.classList.add('open');
+  mobileOverlay.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  mobileOverlay.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+hamburger.addEventListener('click', () => {
+  hamburger.classList.contains('open') ? closeMenu() : openMenu();
+});
+mobileOverlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+
+/* ── FORM SUBMIT ── */
+const intakeForm = document.getElementById('intake-form');
+if (intakeForm) intakeForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.form-submit');
+  btn.textContent = '✓ Submitted! Check your email for the discovery call link.';
+  btn.style.background = 'var(--grass)';
+  btn.style.cursor = 'default';
+  btn.disabled = true;
+});
+
+/* ── NAV ACTIVE STATES ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 120) {
+      current = sec.id;
+    }
+  });
+  navLinks.forEach(a => {
+    a.style.color = '';
+    if (a.getAttribute('href') === '#' + current) {
+      a.style.color = nav.classList.contains('scrolled') ? 'var(--tangerine)' : 'var(--yellow)';
+    }
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
